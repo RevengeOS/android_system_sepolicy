@@ -50,7 +50,6 @@ allow vold rootfs:dir mounton;
 allow vold sdcard_type:dir mounton; # TODO: deprecated in M
 allow vold sdcard_type:filesystem { mount remount unmount }; # TODO: deprecated in M
 allow vold sdcard_posix:filesystem { relabelto relabelfrom };
-allow vold labeledfs:filesystem { relabelfrom };
 allow vold sdcard_type:dir create_dir_perms; # TODO: deprecated in M
 allow vold sdcard_type:file create_file_perms; # TODO: deprecated in M
 
@@ -106,7 +105,7 @@ allow vold fscklogs:file create_file_perms;
 #
 
 # Unmount and mount the fs.
-allow vold labeledfs:filesystem { mount unmount };
+allow vold labeledfs:filesystem { mount unmount relabelfrom };
 
 # Access /efs/userdata_footer.
 # XXX Split into a separate type?
