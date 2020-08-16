@@ -210,6 +210,7 @@
 /system/bin/sload_f2fs	--	u:object_r:e2fs_exec:s0
 /system/bin/make_f2fs	--	u:object_r:e2fs_exec:s0
 /system/bin/fsck_msdos	--	u:object_r:fsck_exec:s0
+/system/bin/newfs_msdos		u:object_r:fsck_exec:s0
 /system/bin/tcpdump	--	u:object_r:tcpdump_exec:s0
 /system/bin/tune2fs	--	u:object_r:fsck_exec:s0
 /system/bin/toolbox	--	u:object_r:toolbox_exec:s0
@@ -452,6 +453,8 @@
 
 /(system_ext|system/system_ext)/bin/aidl_lazy_test_server   u:object_r:aidl_lazy_test_server_exec:s0
 /(system_ext|system/system_ext)/bin/hidl_lazy_test_server   u:object_r:hidl_lazy_test_server_exec:s0
+
+/(system_ext|system/system_ext)/lib(64)?(/.*)?      u:object_r:system_lib_file:s0
 
 #############################
 # Vendor files from /(product|system/product)/vendor_overlay
