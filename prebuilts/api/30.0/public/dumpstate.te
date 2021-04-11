@@ -143,7 +143,12 @@ dump_hal(hal_identity)
 dump_hal(hal_dumpstate)
 dump_hal(hal_wifi)
 dump_hal(hal_graphics_allocator)
+dump_hal(hal_light)
 dump_hal(hal_neuralnetworks)
+dump_hal(hal_thermal)
+dump_hal(hal_power)
+dump_hal(hal_power_stats)
+
 # Vibrate the device after we are done collecting the bugreport
 hal_client_domain(dumpstate, hal_vibrator)
 

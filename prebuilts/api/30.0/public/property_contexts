@@ -113,6 +113,8 @@ ro.boot.wificountrycode u:object_r:exported3_default_prop:s0 exact string
 ro.bt.bdaddr_path u:object_r:exported_bluetooth_prop:s0 exact string
 ro.camera.notify_nfc u:object_r:exported3_default_prop:s0 exact int
 ro.camera.enableLazyHal u:object_r:exported3_default_prop:s0 exact bool
+ro.cdma.home.operator.alpha u:object_r:exported3_default_prop:s0 exact string
+ro.cdma.home.operator.numeric u:object_r:exported3_default_prop:s0 exact string
 ro.com.android.dataroaming u:object_r:exported3_default_prop:s0 exact bool
 ro.com.android.prov_mobiledata u:object_r:exported3_default_prop:s0 exact bool
 ro.config.alarm_alert u:object_r:exported2_config_prop:s0 exact string
@@ -405,6 +407,9 @@ ro.vendor.build.date.utc u:object_r:exported_default_prop:s0 exact int
 ro.vendor.build.fingerprint u:object_r:exported_default_prop:s0 exact string
 ro.vendor.build.version.incremental u:object_r:exported_default_prop:s0 exact string
 ro.vendor.build.version.sdk u:object_r:exported_default_prop:s0 exact int
+ro.vendor.product.cpu.abilist   u:object_r:exported_default_prop:s0 exact string
+ro.vendor.product.cpu.abilist32 u:object_r:exported_default_prop:s0 exact string
+ro.vendor.product.cpu.abilist64 u:object_r:exported_default_prop:s0 exact string
 ro.vndk.lite u:object_r:vndk_prop:s0 exact bool
 ro.vndk.version u:object_r:vndk_prop:s0 exact string
 ro.vts.coverage u:object_r:exported_default_prop:s0 exact int
@@ -477,3 +482,5 @@ cache_key.telephony.                     u:object_r:binder_cache_telephony_serve
 # Graphics related properties
 graphics.gpu.profiler.support          u:object_r:graphics_config_prop:s0 exact bool
 graphics.gpu.profiler.vulkan_layer_apk u:object_r:graphics_config_prop:s0 exact string
+
+ro.cpuvulkan.version u:object_r:graphics_config_prop:s0 exact int
