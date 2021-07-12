@@ -818,7 +818,7 @@ full_treble_only(`
   } {
     data_file_type
     -core_data_file_type
-  }:file_class_set ~{ append getattr ioctl read write };
+  }:file_class_set ~{ append getattr ioctl read write map };
 ')
 full_treble_only(`
   neverallow {
@@ -850,7 +850,7 @@ full_treble_only(`
     # files in /data/misc/zoneinfo/tzdata file. These functions are considered
     # vndk-stable and thus must be allowed for all processes.
     -zoneinfo_data_file
-  }:file_class_set ~{ append getattr ioctl read write };
+  }:file_class_set ~{ append getattr ioctl read write map };
   neverallow {
     vendor_init
     -data_between_core_and_vendor_violators
@@ -858,7 +858,7 @@ full_treble_only(`
     core_data_file_type
     -unencrypted_data_file
     -zoneinfo_data_file
-  }:file_class_set ~{ append getattr ioctl read write };
+  }:file_class_set ~{ append getattr ioctl read write map };
   # vendor init needs to be able to read unencrypted_data_file to create directories with FBE.
   # The vendor init binary lives on the system partition so there is not a concern with stability.
   neverallow vendor_init unencrypted_data_file:file ~r_file_perms;
@@ -924,7 +924,7 @@ full_treble_only(`
     -init
     } {
       vendor_data_file # default label for files on /data/vendor{,_ce,_de}.
-    }:file_class_set ~{ append getattr ioctl read write };
+    }:file_class_set ~{ append getattr ioctl read write map };
 ')
 
 # On TREBLE devices, a limited set of files in /vendor are accessible to
@@ -1365,6 +1365,33 @@ neverallow {
 } self:capability dac_override;
 neverallow { domain -traced_probes } self:capability dac_read_search;
 
+# Latest versions of linux kernel do a check for dac_read_search before
+# verifying dac_override capability. So adding a dont audit rule for
+# dac_read_search for domains that already have dac_override exceptions
+# will address denials of dac_read_search from these domains.
+# kernel commit: https://github.com/torvalds/linux/commit/2a4c22426955d4fc04069811997b7390c0fb858e
+
+dontaudit {
+  dnsmasq
+  dumpstate
+  init
+  installd
+  install_recovery
+  lmkd
+  netd
+  perfprofd
+  postinstall_dexopt
+  recovery
+  sdcardd
+  tee
+  ueventd
+  uncrypt
+  vendor_init
+  vold
+  vold_prepare_subdirs
+  zygote
+} self:capability dac_read_search;
+
 # If an already existing file is opened with O_CREAT, the kernel might generate
 # a false report of a create denial. Silence these denials and make sure that
 # inappropriate permissions are not granted.
@@ -1396,4 +1423,5 @@ userdebug_or_eng(`
 neverallow {
   coredomain
   -init
+  -ueventd
 } mnt_vendor_file:dir *;
